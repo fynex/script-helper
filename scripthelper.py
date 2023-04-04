@@ -1,11 +1,13 @@
 import json
 import subprocess
 import os
+import re
 import zipfile
 import socket
 import string
 import random
 import shutil
+from collections.abc import Iterable
 
 class System:
 
@@ -129,4 +131,55 @@ class FileBackup:
         for file_path in file_paths_to_backup:
             osrun(f"cp -r {file_path} {backup_dir}", DRY_RUN)
 
+
+class DNS:
+
+    @staticmethod
+    def get_ip_by_name(hostname):
+        try:
+            ip_list = socket.gethostbyname_ex(hostname.strip())[2]
+
+            return ip_list
+        except:
+            print(f"[*] Error for '{hostname}'")
+            return []
+
+    @staticmethod
+    def multiline_get_ip_by_name(hostnames: str):
+        ips = []
+
+        for hostname in hostnames.split("\n"):
+            if hostname:
+                ips += DNS.get_ip_by_name(hostname)
+
+        return ips
+
+class PP:
+
+    @staticmethod
+    def p(data):
+        if isinstance(data, Iterable):
+            for e in data:
+                print(e)
+
+    def comma_sep(l: list):
+        return ", ".join(l)
+
+
+class Extract:
+
+    @staticmethod
+    def ipv4(data: str):
+        pat=re.compile(r'''\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.
+        (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.
+        (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.
+        (25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\b''', re.X)
+
+        ips = []
+        for ip_match_tuple in re.findall(pat, data):
+            if ip_match_tuple:
+                ip = ip_match_tuple[0]
+                ips.append(ip)
+
+        return sorted(set(ips))
 
