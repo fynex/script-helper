@@ -183,3 +183,26 @@ class Extract:
 
         return sorted(set(ips))
 
+    @staticmethod
+    def multiline(pattern, string, group=1):
+        try:
+            found = re.search(pattern, string, re.S).group(group)
+
+            return found
+        except AttributeError:
+            print("[!] Pattern not found")
+
+            return ""
+
+    @staticmethod
+    def singleline(pattern, string, group=1):
+        try:
+            found = re.search(pattern, string).group(group)
+
+            return found
+        except AttributeError:
+            print("[!] Pattern not found")
+
+            return ""
+
+
