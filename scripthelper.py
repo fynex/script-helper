@@ -20,22 +20,24 @@ class System:
         return socket.gethostname()
 
     @staticmethod
-    def run(cmd, dry_run=False):
+    def run_without_output(cmd, dry_run=False, print_cmd=True):
         if dry_run:
             print("[dry>] " + cmd)
             return
 
-        print(f"[>] {cmd}")
+        if print_cmd:
+            print(f"[>] {cmd}")
 
         os.system(cmd)
 
     @staticmethod
-    def run_get_output(cmd, dry_run=False):
+    def run(cmd, dry_run=False, print_cmd=True):
         if dry_run:
             print("[dry>] " + cmd)
             return "DRY_RUN_OUTPUT"
 
-        print(f"[>] {cmd}")
+        if print_cmd:
+            print(f"[>] {cmd}")
 
         return subprocess.check_output(cmd.split()).decode()
 
