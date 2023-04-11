@@ -31,7 +31,7 @@ class System:
         os.system(cmd)
 
     @staticmethod
-    def run(cmd, dry_run=False, print_cmd=True):
+    def run(cmd, dry_run=False, print_cmd=False):
         if dry_run:
             print("[dry>] " + cmd)
             return "DRY_RUN_OUTPUT"
