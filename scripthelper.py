@@ -128,7 +128,7 @@ class Dir:
 
     @staticmethod
     def exists(path):
-        return os.path.exists(path):
+        return os.path.exists(path)
 
     @staticmethod
     def assure_trailing_sep(string):
