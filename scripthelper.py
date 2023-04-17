@@ -106,19 +106,35 @@ class File:
     def mv(src_file, dst_file):
         shutil.move(src_file, dst_file)
 
+
 class Dir:
 
     @staticmethod
     def rm(file_path):
         shutil.rmtree(file_path)
 
+    @staticmethod
     def mk(path):
         if not os.path.exists(path):
             os.makedirs(path)
 
+    @staticmethod
+    def copy(src, dst):
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+
+    @staticmethod
+    def cp(src, dst):
+        Dir.copy(src, dst)
+
+    @staticmethod
+    def exists(path):
+        return os.path.exists(path):
+
+    @staticmethod
     def assure_trailing_sep(string):
         if not string.endswith(os.sep):
             return string + os.sep
+        return string
 
 
 class FileBackup:
