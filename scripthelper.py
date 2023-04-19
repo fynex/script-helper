@@ -7,9 +7,14 @@ import socket
 import string
 import random
 import shutil
+import platform
 from collections.abc import Iterable
 
 class System:
+
+    @staticmethod
+    def os_name():
+        return platform.system()
 
     @staticmethod
     def local_ip_addresses():
@@ -38,6 +43,9 @@ class System:
 
         if print_cmd:
             print(f"[>] {cmd}")
+
+        if System.os_name() == "Windows":
+            return subprocess.check_output(cmd.split()).decode("cp437")
 
         return subprocess.check_output(cmd.split()).decode()
 
