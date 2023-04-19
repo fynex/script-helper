@@ -45,9 +45,9 @@ class System:
             print(f"[>] {cmd}")
 
         if System.os_name() == "Windows":
-            return subprocess.check_output(cmd.split()).decode("cp437")
+            return subprocess.check_output(cmd.split(), shell=True).decode("cp437")
 
-        return subprocess.check_output(cmd.split()).decode()
+        return subprocess.check_output(cmd.split(), shell=True).decode()
 
 
 class Random:
