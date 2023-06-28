@@ -10,6 +10,8 @@ import shutil
 import platform
 from collections.abc import Iterable
 
+VERBOSE = False
+
 class System:
 
     @staticmethod
@@ -167,7 +169,8 @@ class DNS:
 
             return ip_list
         except:
-            print(f"[*] Error for '{hostname}'")
+            if VERBOSE:
+                print(f"[*] Error for '{hostname}'")
             return []
 
     @staticmethod
@@ -210,22 +213,28 @@ class Extract:
         return sorted(set(ips))
 
     @staticmethod
-    def multiline(pattern, string, group=1):
+    def multiline(pattern, string):
         try:
-            found = re.search(pattern, string, re.S).group(group)
+            found = re.search(pattern, string, re.S)
 
-            return found
+            if found:
+                return found.group()
+
+            return ""
         except AttributeError:
             print("[!] Pattern not found")
 
             return ""
 
     @staticmethod
-    def singleline(pattern, string, group=1):
+    def singleline(pattern, string):
         try:
-            found = re.search(pattern, string).group(group)
+            found = re.search(pattern, string)
 
-            return found
+            if found:
+                return found.group()
+
+            return ""
         except AttributeError:
             print("[!] Pattern not found")
 
