@@ -72,9 +72,17 @@ class File:
             return content
 
     @staticmethod
+    def read_json(file_path: str):
+        return json.loads(File.read(file_path))
+
+    @staticmethod
     def write(file_path: str, data: str):
         with open(file_path, "w") as f:
             f.write(data)
+
+    @staticmethod
+    def write_json(file_path: str, data: dict):
+        return File.write(file_path, json.dumps(data))
 
     @staticmethod
     def regex_replace(file_path: str, regex_replacements: dict):
