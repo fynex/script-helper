@@ -38,7 +38,7 @@ class System:
         os.system(cmd)
 
     @staticmethod
-    def run(cmd, dry_run=False, print_cmd=False):
+    def old_run(cmd, dry_run=False, print_cmd=False):
         if dry_run:
             print("[dry>] " + cmd)
             return "DRY_RUN_OUTPUT"
@@ -51,6 +51,18 @@ class System:
 
         return subprocess.check_output(cmd.split(), shell=True).decode()
 
+    @staticmethod
+    def run(cmd, dry_run=False, print_cmd=False):
+        if dry_run:
+            print("[dry>] " + cmd)
+            return "DRY_RUN_OUTPUT"
+
+        if print_cmd:
+            print(f"[>] {cmd}")
+
+        proc_result = subprocess.run(cmd, shell=True, capture_output=True)
+
+        return proc_result.stdout.decode("utf-8") + proc_result.stderr.decode("utf-8")
 
 class Random:
 
