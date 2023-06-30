@@ -124,6 +124,10 @@ class File:
     def mv(src_file, dst_file):
         shutil.move(src_file, dst_file)
 
+    @staticmethod
+    def realpath(path):
+        return os.path.realpath(path)
+
 
 class Dir:
 
@@ -154,6 +158,9 @@ class Dir:
             return string + os.sep
         return string
 
+    @staticmethod
+    def realpath(path):
+        return os.path.realpath(path)
 
 class FileBackup:
 
