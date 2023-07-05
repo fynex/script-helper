@@ -267,4 +267,7 @@ class Extract:
 
             return ""
 
+    @staticmethod
+    def all(pattern, string):
+        return [x.group() for x in re.finditer(pattern, string)]
 
