@@ -97,6 +97,10 @@ class File:
         return File.write(file_path, json.dumps(data))
 
     @staticmethod
+    def write_json_pretty(file_path: str, data: dict):
+        return File.write(file_path, json.dumps(data, indent=2))
+
+    @staticmethod
     def regex_replace(file_path: str, regex_replacements: dict):
         replaced_file = File.read(file_path)
 
