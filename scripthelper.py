@@ -275,3 +275,23 @@ class Extract:
     def all(pattern, string):
         return [x.group() for x in re.finditer(pattern, string)]
 
+
+
+class Transform:
+
+    @staticmethod
+    def md_listing_to_list(string):
+        return string.replace("\t", "").replace("- ", "").replace(" ","").split("\n")
+
+    @staticmethod
+    def list_to_comma_separated_string(string):
+        return ", ".join([e.strip() for e in l.lower().split("\n")])
+
+    @staticmethod
+    def list_to_structured_string(a_list, prefix="", suffix=""):
+        res = ""
+
+        for entry in a_list:
+            res += prefix + entry + suffix
+
+        return res
